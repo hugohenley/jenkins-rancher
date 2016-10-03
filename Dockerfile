@@ -10,6 +10,14 @@ ARG group=jenkins
 ARG uid=1000
 ARG gid=1000
 
+RUN curl -L \
+         https://github.com/rancher/rancher-compose/releases/download/v0.8.6/rancher-compose-linux-amd64-v0.8.6.tar.gz \
+         -o rancher-compose.tar.gz && \
+     tar zxvf rancher-compose.tar.gz --strip-components 2 && \
+     rm -rf rancher-compose.tar.gz && \
+     mv rancher-compose /usr/bin/rancher-compose && \
+     chmod +x /usr/bin/rancher-compose
+
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container, 
 # ensure you use the same uid
